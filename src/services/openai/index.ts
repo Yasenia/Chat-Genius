@@ -2,8 +2,8 @@ import { Configuration, OpenAIApi } from 'openai'
 import { AxiosRequestConfig } from 'axios'
 import { SocksProxyAgent } from 'socks-proxy-agent'
 
-const createProxyAgent: () => SocksProxyAgent = () => {
-  const proxyAgentEnabled = process.env['PROXY_AGENT.ENABLE']
+const createProxyAgent: () => SocksProxyAgent | undefined = () => {
+  const proxyAgentEnabled = process.env['PROXY_AGENT.ENABLE'] === 'true'
   if (!proxyAgentEnabled) return
   const proxyAgentUrl = process.env['PROXY_AGENT.URL']
   if (!proxyAgentUrl) throw Error('PROXY_AGENT.URL is not set')
